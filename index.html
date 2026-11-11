@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Chelsea & Sandi — Organic Earthy Edition</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        earth: {
+                            sand: '#F7F4EF',
+                            cream: '#E9E4DC',
+                            clay: '#C88464',
+                            claydark: '#B57352',
+                            olive: '#707963',
+                            olivedark: '#545C4B',
+                            dark: '#2C2A29',
+                            muted: '#7A7572'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    },
+                    borderRadius: {
+                        'organic-1': '2.5rem 1rem 2rem 1.5rem',
+                        'organic-2': '1.5rem 2.5rem 1rem 2rem',
+                        'organic-soft': '2rem'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #F7F4EF;
+            color: #2C2A29;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        body.locked {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F4EF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C88464;
+            border-radius: 4px;
+        }
+
+        /* Smooth transitions */
+        .organic-card {
+            border-radius: 2rem 1rem 2rem 1.5rem;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .organic-card:hover {
+            border-radius: 1.5rem 2rem 1.5rem 2rem;
+        }
+
+        .img-hover {
+            transition: transform 0.7s ease, filter 0.7s ease;
+        }
+        .img-hover:hover {
+            transform: scale(1.03);
+        }
+
+        /* Toast Animation */
+        #toast {
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .floating {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="locked relative bg-earth-sand">
+
+    <!-- BACKGROUND AUDIO PLAYER -->
+    <audio id="wedding-audio" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-piano-112678.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- FLOATING AUDIO CONTROL -->
+    <div id="audio-control" class="fixed bottom-6 right-6 z-40 hidden">
+        <button onclick="toggleAudio()" id="audio-btn" title="Putar/Hentikan Musik" 
+            class="w-12 h-12 rounded-full bg-earth-clay text-earth-sand flex items-center justify-center shadow-xl hover:bg-earth-claydark transition-all border-2 border-earth-cream">
+            <i id="audio-icon" class="fa-solid fa-music text-sm"></i>
+        </button>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed top-6 right-1/2 translate-x-1/2 md:translate-x-0 md:right-6 z-50 opacity-0 pointer-events-none bg-earth-dark text-earth-sand px-6 py-3 text-xs tracking-wider uppercase rounded-organic-soft border-l-4 border-earth-clay shadow-2xl">
+        <span id="toast-message">Berhasil disalin!</span>
+    </div>
+
+    <!-- COVER / SPLASH SCREEN OVERLAY -->
+    <section id="cover-overlay" class="fixed inset-0 z-50 bg-earth-cream flex flex-col justify-between p-6 md:p-12 transition-transform duration-1000 ease-in-out">
+        <!-- Top Tag -->
+        <div class="text-center md:text-left">
+            <span class="text-[10px] md:text-xs tracking-[0.3em] uppercase text-earth-olive font-semibold">The Wedding Invitation</span>
+        </div>
+
+        <!-- Center Organic Hero -->
+        <div class="my-auto text-center py-8 max-w-xl mx-auto bg-earth-sand/60 backdrop-blur-md p-8 rounded-organic-1 border border-earth-clay/20 shadow-lg">
+            <span class="text-xs tracking-widest uppercase text-earth-clay font-medium mb-3 block">Special Celebration Of</span>
+            
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-serif font-medium text-earth-dark mb-4 leading-tight">
+                Chelsea <span class="font-serif italic font-normal text-earth-clay">&amp;</span> Sandi
+            </h1>
+
+            <div class="w-12 h-1 bg-earth-clay mx-auto my-4 rounded-full"></div>
+
+            <p class="text-xs md:text-sm text-earth-muted font-light tracking-wider mb-8 italic">
+                "Kepada Yth. Bapak/Ibu/Saudara/i"
+            </p>
+
+            <div class="mb-6">
+                <p id="guest-name" class="text-base md:text-lg font-semibold text-earth-dark capitalize px-4 py-2 bg-earth-cream rounded-xl inline-block shadow-sm">
+                    Tamu Undangan Spesial
+                </p>
+            </div>
+
+            <div>
+                <button onclick="openInvitation()" class="group inline-flex items-center gap-3 px-8 py-4 bg-earth-clay text-earth-sand text-xs tracking-[0.2em] uppercase font-semibold rounded-organic-soft hover:bg-earth-claydark transition-all shadow-md hover:scale-105">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                    <span>Buka Undangan</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Date Meta -->
+        <div class="flex justify-between items-center text-[10px] md:text-xs tracking-widest text-earth-olive uppercase font-medium">
+            <span>01 . 01 . 2027</span>
+            <span>Gedung Diponegoro</span>
+        </div>
+    </section>
+
+
+    <!-- MAIN INVITATION CONTENT -->
+    <main id="main-content" class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 space-y-24">
+        
+        <!-- HERO / QUOTE SECTION -->
+        <section class="text-center max-w-2xl mx-auto pt-8">
+            <div class="inline-block p-3 bg-earth-clay/10 rounded-full mb-4 text-earth-clay">
+                <i class="fa-solid fa-seedling text-xl"></i>
+            </div>
+            <span class="text-xs tracking-[0.3em] uppercase text-earth-olive font-semibold block mb-2">The Beginning of Forever</span>
+            <h2 class="text-4xl md:text-6xl font-serif text-earth-dark mb-6">Chelsea &amp; Sandi</h2>
+            
+            <div class="bg-earth-cream p-6 md:p-8 rounded-organic-2 border border-earth-clay/25 shadow-sm">
+                <p class="font-serif italic text-sm md:text-base text-earth-dark leading-relaxed mb-4">
+                    "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
+                </p>
+                <span class="text-xs tracking-widest uppercase text-earth-clay font-bold">— QS. Ar-Rum: 21</span>
+            </div>
+        </section>
+
+
+        <!-- COUPLE PROFILES SECTION -->
+        <section>
+            <div class="text-center max-w-lg mx-auto mb-12">
+                <span class="text-xs tracking-[0.3em] uppercase text-earth-olive font-semibold">Mempelai Bahagia</span>
+                <h3 class="text-3xl md:text-4xl font-serif text-earth-dark mt-1">Calon Pengantin</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                
+                <!-- Bride (Chelsea) -->
+                <div class="bg-earth-cream p-6 md:p-8 rounded-organic-1 border border-earth-clay/20 text-center flex flex-col items-center shadow-md">
+                    <div class="relative w-48 h-56 md:w-56 md:h-64 mb-6 overflow-hidden rounded-organic-2 shadow-inner bg-earth-sand">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" 
+                             alt="Chelsea" class="w-full h-full object-cover img-hover">
+                    </div>
+                    
+                    <h4 class="text-3xl font-serif text-earth-dark mb-1">Chelsea</h4>
+                    <p class="text-xs tracking-widest text-earth-clay font-semibold uppercase mb-3">Chelsea Amelia, S.Ds.</p>
+                    <p class="text-xs text-earth-muted leading-relaxed mb-6 font-light">
+                        Putri tercinta dari Bapak Rahmat Hidayat &amp; Ibu Sri Wahyuni.
+                    </p>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-2 px-5 py-2.5 bg-earth-sand text-earth-dark text-xs tracking-wider uppercase rounded-full hover:bg-earth-clay hover:text-earth-sand transition-all shadow-sm">
+                        <i class="fa-brands fa-instagram text-sm"></i>
+                        <span>@chelsea.amelia</span>
+                    </a>
+                </div>
+
+                <!-- Groom (Sandi) -->
+                <div class="bg-earth-cream p-6 md:p-8 rounded-organic-2 border border-earth-clay/20 text-center flex flex-col items-center shadow-md">
+                    <div class="relative w-48 h-56 md:w-56 md:h-64 mb-6 overflow-hidden rounded-organic-1 shadow-inner bg-earth-sand">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80" 
+                             alt="Sandi" class="w-full h-full object-cover img-hover">
+                    </div>
+                    
+                    <h4 class="text-3xl font-serif text-earth-dark mb-1">Sandi</h4>
+                    <p class="text-xs tracking-widest text-earth-clay font-semibold uppercase mb-3">Sandi Pratama, S.T.</p>
+                    <p class="text-xs text-earth-muted leading-relaxed mb-6 font-light">
+                        Putra tercinta dari Bapak Hendra Gunawan &amp; Ibu Dewi Lestari.
+                    </p>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-2 px-5 py-2.5 bg-earth-sand text-earth-dark text-xs tracking-wider uppercase rounded-full hover:bg-earth-clay hover:text-earth-sand transition-all shadow-sm">
+                        <i class="fa-brands fa-instagram text-sm"></i>
+                        <span>@sandi.pratama</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- COUNTDOWN TIMER SECTION -->
+        <section class="bg-earth-olive text-earth-sand p-8 md:p-12 rounded-organic-1 shadow-xl text-center relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-serif">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            
+            <span class="text-xs tracking-[0.3em] uppercase text-earth-cream font-semibold block mb-2">Menuju Hari Bahagia</span>
+            <h3 class="text-3xl md:text-4xl font-serif mb-8">01 Januari 2027</h3>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xl mx-auto">
+                <div class="bg-earth-olivedark/80 p-4 rounded-organic-soft border border-earth-sand/20">
+                    <span id="days" class="font-serif text-3xl md:text-5xl font-bold text-earth-cream block">00</span>
+                    <span class="text-[10px] tracking-widest uppercase text-earth-sand/80 mt-1 block">Hari</span>
+                </div>
+                <div class="bg-earth-olivedark/80 p-4 rounded-organic-soft border border-earth-sand/20">
+                    <span id="hours" class="font-serif text-3xl md:text-5xl font-bold text-earth-cream block">00</span>
+                    <span class="text-[10px] tracking-widest uppercase text-earth-sand/80 mt-1 block">Jam</span>
+                </div>
+                <div class="bg-earth-olivedark/80 p-4 rounded-organic-soft border border-earth-sand/20">
+                    <span id="minutes" class="font-serif text-3xl md:text-5xl font-bold text-earth-cream block">00</span>
+                    <span class="text-[10px] tracking-widest uppercase text-earth-sand/80 mt-1 block">Menit</span>
+                </div>
+                <div class="bg-earth-olivedark/80 p-4 rounded-organic-soft border border-earth-sand/20">
+                    <span id="seconds" class="font-serif text-3xl md:text-5xl font-bold text-earth-cream block">00</span>
+                    <span class="text-[10px] tracking-widest uppercase text-earth-sand/80 mt-1 block">Detik</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- EVENT DETAILS (AKAD & RESEPSI) -->
+        <section>
+            <div class="text-center max-w-lg mx-auto mb-12">
+                <span class="text-xs tracking-[0.3em] uppercase text-earth-olive font-semibold">Waktu &amp; Tempat</span>
+                <h3 class="text-3xl md:text-4xl font-serif text-earth-dark mt-1">Rangkaian Acara</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                
+                <!-- Akad -->
+                <div class="bg-earth-cream p-8 rounded-organic-1 border border-earth-clay/20 flex flex-col justify-between shadow-md">
+                    <div>
+                        <div class="w-12 h-12 bg-earth-clay text-earth-sand rounded-full flex items-center justify-center mb-6 shadow-sm">
+                            <i class="fa-solid fa-ring text-lg"></i>
+                        </div>
+                        <h4 class="text-2xl font-serif text-earth-dark mb-2">Akad Nikah</h4>
+                        <p class="text-xs tracking-widest uppercase text-earth-clay font-semibold mb-6">Jumat, 01 Januari 2027</p>
+                        
+                        <div class="space-y-3 text-xs text-earth-muted mb-8">
+                            <p class="flex items-center gap-3">
+                                <i class="fa-regular fa-clock text-earth-dark text-sm w-4"></i>
+                                <span class="font-medium text-earth-dark">Pukul 10.00 WIB — Selesai</span>
+                            </p>
+                            <p class="flex items-start gap-3">
+                                <i class="fa-solid fa-location-dot text-earth-dark text-sm w-4 mt-0.5"></i>
+                                <span><strong>Gedung Diponegoro</strong><br>Jl. Diponegoro No. 45, Kota Semarang</span>
+                            </p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-wider text-earth-olive italic">Khusus Keluarga &amp; Tamu Terdekat</span>
+                </div>
+
+                <!-- Resepsi -->
+                <div class="bg-earth-cream p-8 rounded-organic-2 border border-earth-clay/20 flex flex-col justify-between shadow-md">
+                    <div>
+                        <div class="w-12 h-12 bg-earth-clay text-earth-sand rounded-full flex items-center justify-center mb-6 shadow-sm">
+                            <i class="fa-solid fa-champagne-glasses text-lg"></i>
+                        </div>
+                        <h4 class="text-2xl font-serif text-earth-dark mb-2">Resepsi Pernikahan</h4>
+                        <p class="text-xs tracking-widest uppercase text-earth-clay font-semibold mb-6">Jumat, 01 Januari 2027</p>
+                        
+                        <div class="space-y-3 text-xs text-earth-muted mb-8">
+                            <p class="flex items-center gap-3">
+                                <i class="fa-regular fa-clock text-earth-dark text-sm w-4"></i>
+                                <span class="font-medium text-earth-dark">Pukul 11.30 WIB — Selesai</span>
+                            </p>
+                            <p class="flex items-start gap-3">
+                                <i class="fa-solid fa-location-dot text-earth-dark text-sm w-4 mt-0.5"></i>
+                                <span><strong>Gedung Diponegoro</strong><br>Main Ballroom, Jl. Diponegoro No. 45, Semarang</span>
+                            </p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-wider text-earth-olive italic">Merupakan suatu kehormatan bagi kami</span>
+                </div>
+
+            </div>
+
+            <!-- Map & Calendar Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://maps.google.com/?q=Gedung+Diponegoro" target="_blank" rel="noopener noreferrer"
+                   class="w-full sm:w-auto px-8 py-4 bg-earth-clay text-earth-sand text-xs tracking-[0.2em] uppercase font-semibold rounded-organic-soft hover:bg-earth-claydark transition-all shadow-md flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span>Petunjuk Peta Google Maps</span>
+                </a>
+                
+                <button onclick="downloadICal()" 
+                   class="w-full sm:w-auto px-8 py-4 bg-earth-cream text-earth-dark border border-earth-clay/30 text-xs tracking-[0.2em] uppercase font-semibold rounded-organic-soft hover:bg-earth-clay hover:text-earth-sand transition-all shadow-sm flex items-center justify-center gap-3">
+                    <i class="fa-regular fa-calendar-plus"></i>
+                    <span>Simpan Ke Kalender</span>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- PREWEDDING GALLERY SECTION -->
+        <section>
+            <div class="text-center max-w-lg mx-auto mb-12">
+                <span class="text-xs tracking-[0.3em] uppercase text-earth-olive font-semibold">Galeri Kenangan</span>
+                <h3 class="text-3xl md:text-4xl font-serif text-earth-dark mt-1">Momen Bahagia Kami</h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <div class="overflow-hidden rounded-organic-1 bg-earth-cream p-2 shadow-md cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" 
+                         alt="Prewedding 1" class="w-full h-72 object-cover rounded-organic-2 img-hover">
+                </div>
+
+                <div class="overflow-hidden rounded-organic-2 bg-earth-cream p-2 shadow-md cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" 
+                         alt="Prewedding 2" class="w-full h-72 object-cover rounded-organic-1 img-hover">
+                </div>
+
+                <div class="overflow-hidden rounded-organic-1 bg-earth-cream p-2 shadow-md cursor-pointer sm:col-span-2 md:col-span-1" onclick="openLightbox('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" 
+                         alt="Prewedding 3" class="w-full h-72 object-cover rounded-organic-2 img-hover">
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- DIGITAL GIFT / AMPLOP DIGITAL SECTION -->
+        <section class="bg-earth-cream p-8 md:p-12 rounded-organic-2 border border-earth-clay/25 shadow-md">
+            <div class="max-w-xl mx-auto text-center">
+                <span class="text-xs tracking-[0.3em] uppercase text-earth-olive font-semibold block mb-1">Tanda Kasih</span>
+                <h3 class="text-3xl md:text-4xl font-serif text-earth-dark mb-4">Amplop Digital</h3>
+                <p class="text-xs md:text-sm text-earth-muted leading-relaxed mb-8 font-light">
+                    Doa restu Anda merupakan karunia terindah bagi kami. Namun jika Anda ingin mengirimkan tanda kasih, dapat melalui rekening di bawah ini:
+                </p>
+
+                <!-- Bank Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-8">
+                    
+                    <!-- BCA -->
+                    <div class="bg-earth-sand p-6 rounded-organic-1 border border-earth-clay/20 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-bold font-serif text-lg tracking-wide text-earth-dark">BCA</span>
+                                <i class="fa-solid fa-credit-card text-earth-clay"></i>
+                            </div>
+                            <p class="text-[10px] uppercase tracking-widest text-earth-muted mb-1">Nomor Rekening</p>
+                            <p class="font-mono text-xl font-semibold tracking-wider text-earth-dark mb-2">8830 1928 44</p>
+                            <p class="text-xs uppercase tracking-wider text-earth-dark font-medium mb-4">a.n Chelsea Amelia</p>
+                        </div>
+                        <button onclick="copyToClipboard('8830192844', 'No. Rekening BCA')" 
+                                class="w-full py-2.5 bg-earth-cream text-earth-dark border border-earth-clay/30 text-[10px] tracking-widest uppercase font-semibold rounded-organic-soft hover:bg-earth-clay hover:text-earth-sand transition-all">
+                            <i class="fa-regular fa-copy mr-1"></i> Salin No. Rekening
+                        </button>
+                    </div>
+
+                    <!-- Mandiri -->
+                    <div class="bg-earth-sand p-6 rounded-organic-2 border border-earth-clay/20 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-bold font-serif text-lg tracking-wide text-earth-dark">MANDIRI</span>
+                                <i class="fa-solid fa-building-columns text-earth-clay"></i>
+                            </div>
+                            <p class="text-[10px] uppercase tracking-widest text-earth-muted mb-1">Nomor Rekening</p>
+                            <p class="font-mono text-xl font-semibold tracking-wider text-earth-dark mb-2">1370 0019 8273 1</p>
+                            <p class="text-xs uppercase tracking-wider text-earth-dark font-medium mb-4">a.n Sandi Pratama</p>
+                        </div>
+                        <button onclick="copyToClipboard('1370001982731', 'No. Rekening Mandiri')" 
+                                class="w-full py-2.5 bg-earth-cream text-earth-dark border border-earth-clay/30 text-[10px] tracking-widest uppercase font-semibold rounded-organic-soft hover:bg-earth-clay hover:text-earth-sand transition-all">
+                            <i class="fa-regular fa-copy mr-1"></i> Salin No. Rekening
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- QRIS Button -->
+                <div>
+                    <button onclick="toggleQrisModal(true)" class="px-8 py-3.5 bg-earth-clay text-earth-sand text-xs tracking-widest uppercase font-semibold rounded-organic-soft hover:bg-earth-claydark transition-all shadow-md inline-flex items-center gap-2">
+                        <i class="fa-solid fa-qrcode"></i>
+                        <span>Tampilkan QRIS Pembayaran</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- RSVP & GUESTBOOK SECTION -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Form RSVP (Left) -->
+            <div class="lg:col-span-5 bg-earth-cream p-6 md:p-8 rounded-organic-1 border border-earth-clay/20 shadow-md">
+                <span class="text-xs tracking-[0.3em] uppercase text-earth-olive font-semibold block mb-1">Konfirmasi</span>
+                <h3 class="text-2xl font-serif text-earth-dark mb-6">RSVP &amp; Ucapan Doa</h3>
+                
+                <form id="rsvp-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] tracking-widest uppercase font-semibold text-earth-dark mb-1">Nama Lengkap</label>
+                        <input type="text" id="rsvp-name" required placeholder="Contoh: Rian Hidayat" 
+                               class="w-full bg-earth-sand border border-earth-clay/30 p-3 text-xs rounded-xl focus:outline-none focus:border-earth-clay">
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] tracking-widest uppercase font-semibold text-earth-dark mb-1">Kehadiran</label>
+                        <select id="rsvp-status" required class="w-full bg-earth-sand border border-earth-clay/30 p-3 text-xs rounded-xl focus:outline-none focus:border-earth-clay">
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak Hadir">Berhalangan Hadir</option>
+                            <option value="Ragu-ragu">Masih Ragu</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] tracking-widest uppercase font-semibold text-earth-dark mb-1">Pesan &amp; Doa Restu</label>
+                        <textarea id="rsvp-message" rows="4" required placeholder="Tuliskan doa terbaik untuk Chelsea & Sandi..." 
+                                  class="w-full bg-earth-sand border border-earth-clay/30 p-3 text-xs rounded-xl focus:outline-none focus:border-earth-clay"></textarea>
+                    </div>
+
+                    <button type="submit" 
+                            class="w-full py-3.5 bg-earth-clay text-earth-sand text-xs tracking-widest uppercase font-semibold rounded-organic-soft hover:bg-earth-claydark transition-all shadow-md">
+                        Kirim Ucapan &amp; RSVP
+                    </button>
+                </form>
+            </div>
+
+            <!-- Live Guestbook Feed (Right) -->
+            <div class="lg:col-span-7 bg-earth-cream p-6 md:p-8 rounded-organic-2 border border-earth-clay/20 shadow-md flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-6 pb-3 border-b border-earth-clay/20">
+                        <h3 class="text-2xl font-serif text-earth-dark">Buku Tamu</h3>
+                        <span id="wishes-count" class="text-xs font-mono bg-earth-clay text-earth-sand px-3 py-1 rounded-full">3 Ucapan</span>
+                    </div>
+
+                    <!-- Wishes Container -->
+                    <div id="wishes-container" class="space-y-4 max-h-[420px] overflow-y-auto pr-1">
+                        
+                        <div class="p-4 bg-earth-sand rounded-xl border border-earth-clay/10">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-semibold text-xs text-earth-dark">Nadia &amp; Partner</span>
+                                <span class="text-[9px] uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-medium">Hadir</span>
+                            </div>
+                            <p class="text-xs text-earth-muted italic">"Selamat menempuh hidup baru Chelsea &amp; Sandi! Semoga langgeng dan bahagia selalu."</p>
+                            <span class="text-[9px] text-earth-muted/70 block mt-2">Baru saja</span>
+                        </div>
+
+                        <div class="p-4 bg-earth-sand rounded-xl border border-earth-clay/10">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-semibold text-xs text-earth-dark">Reza Pratama</span>
+                                <span class="text-[9px] uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-medium">Hadir</span>
+                            </div>
+                            <p class="text-xs text-earth-muted italic">"Happy Wedding bro Sandi dan Chelsea! Lancar acaranya."</p>
+                            <span class="text-[9px] text-earth-muted/70 block mt-2">1 jam lalu</span>
+                        </div>
+
+                        <div class="p-4 bg-earth-sand rounded-xl border border-earth-clay/10">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-semibold text-xs text-earth-dark">Dinda Maharani</span>
+                                <span class="text-[9px] uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full font-medium">Ragu</span>
+                            </div>
+                            <p class="text-xs text-earth-muted italic">"Semoga dilancarkan segala persiapan pernikahannya ya!"</p>
+                            <span class="text-[9px] text-earth-muted/70 block mt-2">3 jam lalu</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="text-center pt-12 border-t border-earth-clay/20">
+            <h2 class="text-3xl md:text-5xl font-serif text-earth-dark mb-2">Chelsea &amp; Sandi</h2>
+            <p class="text-xs tracking-[0.3em] uppercase text-earth-olive mb-6">01 . 01 . 2027 &bull; Gedung Diponegoro</p>
+            <p class="text-[10px] tracking-widest uppercase text-earth-muted">
+                Organic Earthy Wedding Invitation &bull; Crafted with Love
+            </p>
+        </footer>
+
+    </main>
+
+
+    <!-- QRIS MODAL -->
+    <div id="qris-modal" class="fixed inset-0 z-50 bg-earth-dark/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-earth-sand rounded-organic-1 border border-earth-clay max-w-sm w-full p-6 text-center relative shadow-2xl">
+            <button onclick="toggleQrisModal(false)" class="absolute top-4 right-4 text-earth-dark hover:text-earth-clay text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <h4 class="font-serif text-2xl text-earth-dark mb-1">QRIS Pembayaran</h4>
+            <p class="text-[10px] tracking-widest uppercase text-earth-muted mb-6">Scan via BCA, Mandiri, GoPay, OVO, ShopeePay</p>
+            
+            <div class="bg-white p-4 rounded-xl border border-earth-clay/20 inline-block mb-4 shadow-inner">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=Wedding-Chelsea-Sandi-2027" 
+                     alt="QRIS Code" class="w-48 h-48 mx-auto">
+            </div>
+
+            <p class="text-xs uppercase tracking-widest font-semibold text-earth-dark mb-1">Chelsea &amp; Sandi Wedding</p>
+            <p class="text-[10px] text-earth-muted uppercase tracking-widest mb-6">NMID: ID1098273645102</p>
+
+            <button onclick="toggleQrisModal(false)" class="w-full py-3 bg-earth-clay text-earth-sand text-xs tracking-widest uppercase font-semibold rounded-organic-soft">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-earth-dark/90 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-earth-sand text-2xl hover:text-earth-clay">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Zoom Photo" class="max-w-full max-h-[90vh] object-contain rounded-xl">
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Read Guest Name from URL (?to=Nama)
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guest = urlParams.get('to') || urlParams.get('n');
+            if (guest) {
+                document.getElementById('guest-name').innerText = decodeURIComponent(guest);
+            }
+        });
+
+        // 2. Open Invitation & Audio Control
+        let isAudioPlaying = false;
+        const audio = document.getElementById('wedding-audio');
+
+        function openInvitation() {
+            document.body.classList.remove('locked');
+            
+            const cover = document.getElementById('cover-overlay');
+            cover.style.transform = 'translateY(-100%)';
+
+            document.getElementById('audio-control').classList.remove('hidden');
+            playAudio();
+        }
+
+        function playAudio() {
+            audio.play().then(() => {
+                isAudioPlaying = true;
+                updateAudioIcon();
+            }).catch(err => {
+                console.log("Autoplay prevented:", err);
+            });
+        }
+
+        function toggleAudio() {
+            if (isAudioPlaying) {
+                audio.pause();
+                isAudioPlaying = false;
+            } else {
+                audio.play();
+                isAudioPlaying = true;
+            }
+            updateAudioIcon();
+        }
+
+        function updateAudioIcon() {
+            const icon = document.getElementById('audio-icon');
+            if (isAudioPlaying) {
+                icon.className = "fa-solid fa-music text-sm animate-spin";
+            } else {
+                icon.className = "fa-solid fa-pause text-sm";
+            }
+        }
+
+        // 3. Countdown Timer (01 Jan 2027 10:00:00 WIB)
+        const targetDate = new Date("January 1, 2027 10:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 4. Clipboard Copy & Toast
+        function copyToClipboard(text, label) {
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast(`${label} berhasil disalin!`);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            document.getElementById("toast-message").innerText = message;
+            
+            toast.classList.remove("opacity-0", "pointer-events-none");
+            toast.classList.add("opacity-100");
+
+            setTimeout(() => {
+                toast.classList.remove("opacity-100");
+                toast.classList.add("opacity-0", "pointer-events-none");
+            }, 3000);
+        }
+
+        // 5. QRIS & Lightbox Modals
+        function toggleQrisModal(show) {
+            const modal = document.getElementById('qris-modal');
+            if (show) modal.classList.remove('hidden');
+            else modal.classList.add('hidden');
+        }
+
+        function openLightbox(src) {
+            const modal = document.getElementById('lightbox-modal');
+            document.getElementById('lightbox-img').src = src;
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        // 6. Interactive RSVP & Wishes Feed
+        let totalWishes = 3;
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('rsvp-name').value;
+            const status = document.getElementById('rsvp-status').value;
+            const message = document.getElementById('rsvp-message').value;
+
+            if (!name || !message) return;
+
+            let badgeColor = 'text-emerald-700 bg-emerald-100';
+            if (status === 'Tidak Hadir') badgeColor = 'text-rose-700 bg-rose-100';
+            else if (status === 'Ragu-ragu') badgeColor = 'text-amber-700 bg-amber-100';
+
+            const container = document.getElementById('wishes-container');
+            const newWishHTML = `
+                <div class="p-4 bg-earth-sand rounded-xl border border-earth-clay/10 animate-fade-in">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-semibold text-xs text-earth-dark">${escapeHtml(name)}</span>
+                        <span class="text-[9px] uppercase tracking-wider ${badgeColor} px-2 py-0.5 rounded-full font-medium">${status}</span>
+                    </div>
+                    <p class="text-xs text-earth-muted italic">"${escapeHtml(message)}"</p>
+                    <span class="text-[9px] text-earth-muted/70 block mt-2">Baru saja</span>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('afterbegin', newWishHTML);
+            totalWishes++;
+            document.getElementById('wishes-count').innerText = `${totalWishes} Ucapan`;
+
+            document.getElementById('rsvp-form').reset();
+            showToast('Terima kasih! Ucapan Anda telah terkirim.');
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        // 7. iCal Calendar Generator
+        function downloadICal() {
+            const icalData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chelsea & Sandi Wedding//ID
+BEGIN:VEVENT
+SUMMARY:The Wedding of Chelsea & Sandi
+DESCRIPTION:Acara Pernikahan Chelsea Amelia & Sandi Pratama. Pukul 10:00 WIB di Gedung Diponegoro, Semarang.
+LOCATION:Gedung Diponegoro, Semarang, Jawa Tengah
+DTSTART:20270101T030000Z
+DTEND:20270101T080000Z
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icalData], { type: 'text/calendar;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'wedding-chelsea-sandi.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
+```
+eof
+
+I have successfully generated the complete, self-contained single-file HTML wedding invitation for **Chelsea & Sandi** featuring the **Organic Earthy Tone** design style.
